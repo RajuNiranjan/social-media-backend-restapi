@@ -1,10 +1,12 @@
 import express, { json } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import router from "./routes/user.routes.js";
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+app.use("/api/user", router);
 
 const PORT = 5000 || process.env.PORT;
 
