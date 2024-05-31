@@ -8,34 +8,31 @@ export const getAllUsers = async (req, res, next) => {
     console.log(error);
   }
   if (!users) {
-    return res.status(404).json({ message: "no user found" });
+    return res.status(400).json({ message: "user not found" });
   }
   return res.status(200).json({ users });
 };
 
-export const singnup = async (req, res, next) => {
+export const signUp = async (req, res, next) => {
   const { name, email, password } = req.body;
   let existingUser;
   try {
-    existingUser = await userModel.find({ email });
+    existingUser = await userModel.findOne({ email });
   } catch (error) {
     console.log(error);
   }
-
   if (existingUser) {
-    return res.status(400).json({ message: "email already exist" });
+    return res.status(400).json({ message: "user already existed" });
   }
-
-  const newUser = new User({
+  const user = new userModel({
     name,
     email,
     password,
   });
-
   try {
-    await newUser.save();
+    await user.save();
   } catch (error) {
     console.log(error);
   }
-  return res.status(201).json({ newUser });
+  return res.status(201).json({ user });
 };
