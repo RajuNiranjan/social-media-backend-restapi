@@ -2,6 +2,7 @@ import express, { json } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import router from "./routes/user.routes.js";
+import blogRouter from "./routes/blog.router.js";
 dotenv.config();
 
 const app = express();
@@ -9,6 +10,8 @@ const app = express();
 app.use(express.json());
 
 app.use("/api/users", router);
+
+app.use("/api/blog", blogRouter);
 
 const PORT = 5000 || process.env.PORT;
 
