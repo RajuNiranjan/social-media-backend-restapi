@@ -19,7 +19,7 @@ const dbUrl = process.env.MONGO_DB;
 
 mongoose
   .connect(dbUrl)
-  .then(() => console.log("server connected to database"))
+  .then(() => console.log("server connected to mongoDB"))
   .catch((err) => console.log(err));
 
 app.listen(PORT, () =>
